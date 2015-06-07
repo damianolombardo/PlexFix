@@ -21,10 +21,17 @@ MDDIR = path.join(LOCALAPPDATA, "Plex Media Server", "Metadata")
 
 def plexfix(searchstring):
     """
+    Search Plex database for a specific item and remove its metadata.
+    Args:
+        :param searchstring: Name of item to be searched, should be a close to the actual name as possible
+        :type searchstring: str
 
-    :param searchstring:
-    :type searchstring: str
-    :return:
+    Returns:
+        :return: None
+
+    References:
+        [1] https://nikansell.wordpress.com/2012/03/14/fixing-corrupt-plex-thumbnails/
+        [2] http://axisdata.com/FixPlexPosters
     """
 
     if searchstring == '':
