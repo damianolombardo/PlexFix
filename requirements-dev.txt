@@ -1,0 +1,24 @@
+# Runtime requirements
+--requirement requirements.txt
+
+# Testing
+pytest
+py
+mock
+
+# Linting
+flake8
+mccabe
+pep8
+pyflakes
+
+# Documentation
+Sphinx
+docutils
+Jinja2
+MarkupSafe
+Pygments
+
+# Miscellaneous
+Paver
+colorama
