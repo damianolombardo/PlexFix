@@ -10,9 +10,9 @@ Usage
 =====
 
 Either;
-    `python plexfix 'show 1' 'show 2'`
+    `python plexfix [options] 'show name'`
 or on windows
-    `plexfix 'show 1' 'show 2'`
+    `plexfix [options] 'show name'`
 
 This will move the metadata associated with an item to a folder called tmp in the root directory of your system.
 Then go to `Plex Media Manager <http://localhost:32400/web/index.html>`_ and manually refresh the item you have removed from Plex.
