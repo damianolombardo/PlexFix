@@ -261,7 +261,7 @@ setup_dict = dict(
     zip_safe=False,  # don't use eggs
     entry_points={
         'console_scripts': [
-            'plexfix_cli = plexfix.main:entry_point'
+            'plexfix = plexfix.plexfix:main'
         ],
         # if you have a gui, use this
         # 'gui_scripts': [

@@ -1,1 +1,1 @@
-python plexfix %*
+python plexfix\plexfix.py %*
