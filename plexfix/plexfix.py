@@ -45,9 +45,7 @@ def main(argv):
 Options:
     -t, --type:
         s, series = deletes metadata for a an entire series.
-        e, episode = deletes metadata for an episode
         m, movie = deletes metadata for a movie
-        se, series_episodes = deletes metadata for an entire series including all episodes
     -h, --help:
         Prints this help file
     -d:
@@ -70,18 +68,9 @@ Options:
         # do the series search
         sql_string = "SELECT title, guid FROM metadata_items WHERE title LIKE '{}' AND metadata_type LIKE 2".format(
             searchstring)
-    elif mediatype.lower() in ["e", "episode"]:
-        # do the epispode thing
-        sql_string = "SELECT title, guid FROM metadata_items WHERE title LIKE '{}' AND metadata_type LIKE 4".format(
-            searchstring)
     elif mediatype.lower() in ["m", "movie"]:
         # do the movie thing
         sql_string = "SELECT title, guid FROM metadata_items WHERE title LIKE '{}' AND metadata_type LIKE 1".format(
-            searchstring)
-    elif mediatype.lower() in ["se", "series_episodes"]:
-        # do the entire series thing
-        raise NotImplementedError('Still clarifying how to get thr right address of each episode in a series, if it is needed at all?')
-        sql_string = "SELECT title, guid, id FROM metadata_items WHERE title LIKE '{}' AND metadata_type LIKE 2".format(
             searchstring)
     else:
         raise Exception
@@ -120,21 +109,7 @@ Options:
     result = list(conn.execute(sql_string))
     print('Searching for: {}'.format(searchstring))
     if len(result) == 1:
-        if mediatype.lower() in ["se", "series_episodes"]:
-            parent_id = result[0][2]
-            # Get the series ID
-            sql_string = "SELECT title, guid, id FROM metadata_items WHERE parent_id LIKE '{}' AND metadata_type LIKE 3".format(
-                parent_id)
-            results = list(conn.execute(sql_string))
-            sub_parent_ids = list(zip(*results))[-1]
-            # Get the seasons ID
-            sql_string = "SELECT title, guid, id FROM metadata_items WHERE parent_id IN {} AND metadata_type LIKE 4".format(
-                sub_parent_ids)
-            results = list(conn.execute(sql_string))
-            for result in results:
-                result_execute(result)
-        else:
-            result_execute(result[0])
+        result_execute(result[0])
 
     elif len(result) > 1:
         print('Multiple Entries Found')
@@ -147,10 +122,4 @@ Options:
 
 
 if __name__ == '__main__':
-    main(['-t', 'se', 'Fawlty Towers'])
-    # # for arg in :
     main(argv[1:])
-    # print(argv)
-    # opts, args = getopt.getopt(argv[1:], "ht:d", ["help", "type="])
-    # print(opts)
-    # print(args)
